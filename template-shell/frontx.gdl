@@ -1,0 +1,16 @@
+# What this FrontX shell does for a product beyond mounting screens, for the
+# tools that assemble one (Gearbox, Constructor Studio). Only what package.json
+# cannot say: what the shell carries is read from packages/* and package.json.
+# See "Package descriptions: frontx.gdl" in the repository README.
+gdl_version = "1.6"
+
+shell(
+    # The stock shell mounts screens without signing anyone in: src-app/app/
+    # has no auth module. A product whose backend signs users in (an OIDC
+    # authn plugin) needs a shell that does; set this to True in a fork that
+    # adds sign-in.
+    signs_in = False,
+    # Its backend addresses are fixed at build: there is no public/env.js.
+    # A fork that reads them at start names the file, e.g. "public/env.js".
+    runtime_env = None,
+)

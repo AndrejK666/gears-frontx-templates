@@ -24,6 +24,26 @@ frontx add mfe    --source github:constructorfabric/gears-frontx-templates//temp
 
 `<ref>` is a tag, branch, or commit. Pin it in anything meant to be reproducible - a floating branch ref (`@main`) will move under you.
 
+## Package descriptions: `frontx.gdl`
+
+A FrontX package can describe itself in a `frontx.gdl` beside its `package.json`, the way a gear has its `gear.gdl`. Tools that assemble a product from FrontX packages (Gearbox, Constructor Studio) read it instead of guessing from source. It is GDL 1.6: declarative, one call per file, and it states only what `package.json` and `mfe.json` cannot.
+
+```python
+# template-shell/frontx.gdl
+gdl_version = "1.6"
+shell(signs_in = False, runtime_env = None)   # runtime_env: e.g. "public/env.js", read at start
+
+# src-app/mfe_packages/<name>/frontx.gdl
+gdl_version = "1.6"
+mfe(requires = ["account-management"])   # the backend gears its screens call; [] calls none
+```
+
+- **`shell(signs_in = ..., runtime_env = ...)`**: whether the shell signs users in before it mounts a screen, and the file it reads the product's addresses from at start (`None` when they are fixed at build). What the shell carries is not declared: it is read from `packages/*` and `package.json`. The stock `template-shell` signs nobody in and has no `public/env.js`, so it declares `signs_in = False, runtime_env = None`. A fork that adds either updates its `frontx.gdl`.
+- **`mfe(requires = [...])`**: the backend gears, by id, that the micro-frontend's screens call (the `<gear>` in a `/cf/<gear>/v1/...` base URL). Screens and extensions stay in `mfe.json`. Every `template-mfe` package carries one; the reference packages call no gear, so they declare `requires = []`. A package copied from `_blank-mfe` carries the file along: name what it calls.
+- **`library()`**: a package micro-frontends share that is not one itself. Nothing more to declare.
+
+`template-shell`'s `frontx.gdl` is in its `ownershipBoundaries`, so `frontx seed` brings it; `template-mfe`'s are inside the package subtrees it already owns. The language reference is Gearbox's `docs/gdl.md`, section "A package's own description: `frontx.gdl`".
+
 ## Relationship to the FrontX ecosystem
 
 The templates pin the FrontX ecosystem packages they consume (`@gears-frontx/api`, `@gears-frontx/mfes`, `@gears-frontx/gts-plugin`, ...) to exact registry versions, published from [`gears-frontx`](https://github.com/constructorfabric/gears-frontx). This repo never builds those packages from source - it only verifies that a pinned version is real (see "Validating locally" below). `template-mfe`'s six overrides into `../template-shell` are the one exception: `template-shell` lives in this same repo, one level up, so its packages resolve locally without a publish round-trip - see the leading comment in `template-mfe/package.json`.

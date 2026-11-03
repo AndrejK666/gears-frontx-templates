@@ -1,0 +1,9 @@
+# What this micro-frontend needs from a product's backend, for the tools that
+# assemble one (Gearbox, Constructor Studio). Its screens and extensions stay
+# in mfe.json. See "Package descriptions: frontx.gdl" in the repository README.
+gdl_version = "1.6"
+
+mfe(
+    # The backend gears its widget calls, by gear id. None: it calls no backend.
+    requires = [],
+)
