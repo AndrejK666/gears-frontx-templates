@@ -26,15 +26,15 @@ frontx add mfe    --source github:constructorfabric/gears-frontx-templates//temp
 
 ## Package descriptions: `frontx.gdl`
 
-A FrontX package can describe itself in a `frontx.gdl` beside its `package.json`, the way a gear has its `gear.gdl`. Tools that assemble a product from FrontX packages (Gearbox, Constructor Studio) read it instead of guessing from source. It is GDL 1.6: declarative, one call per file, and it states only what `package.json` and `mfe.json` cannot.
+A FrontX package can describe itself in a `frontx.gdl` beside its `package.json`, the way a gear has its `gear.gdl`. Tools that assemble a product from FrontX packages (Gearbox, Constructor Studio) read it instead of guessing from source. It is GDL 1.5: declarative, one call per file, and it states only what `package.json` and `mfe.json` cannot.
 
 ```python
 # template-shell/frontx.gdl
-gdl_version = "1.6"
+gdl_version = "1.5"
 shell(signs_in = False, runtime_env = None)   # runtime_env: e.g. "public/env.js", read at start
 
 # src-app/mfe_packages/<name>/frontx.gdl
-gdl_version = "1.6"
+gdl_version = "1.5"
 mfe(requires = ["account-management"])   # the backend gears its screens call; [] calls none
 ```
 

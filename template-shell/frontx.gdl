@@ -2,7 +2,7 @@
 # tools that assemble one (Gearbox, Constructor Studio). Only what package.json
 # cannot say: what the shell carries is read from packages/* and package.json.
 # See "Package descriptions: frontx.gdl" in the repository README.
-gdl_version = "1.6"
+gdl_version = "1.5"
 
 shell(
     # The stock shell mounts screens without signing anyone in: src-app/app/
