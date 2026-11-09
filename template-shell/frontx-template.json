@@ -17,7 +17,6 @@
       "scripts/",
       "__tests__/",
       "package.json",
-      "frontx.gdl",
       "package-lock.json",
       "tsconfig.json",
       "tsconfig.app.json",

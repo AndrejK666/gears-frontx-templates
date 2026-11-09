@@ -1,8 +1,9 @@
-# This shell's passport: everything a tool that assembles a product from FrontX
-# packages (Gearbox, Constructor Studio) needs to know about it, in one file.
-# It restates what package.json says, and those tools check that the two agree,
-# so keep them in step when either changes. See "Package passports: frontx.gdl"
-# in the repository README.
+# Optional passport for the whole shell template. A template may have one
+# frontx.gdl at its root, beside frontx-template.json, or omit it entirely.
+# Example MFEs and workspace packages do not get separate passports here.
+# This is source-template metadata, outside the files copied by frontx seed.
+# It restates package.json; keep both in step. See "Optional template passport:
+# frontx.gdl" in the repository README.
 gdl_version = "1.5"
 
 shell(
